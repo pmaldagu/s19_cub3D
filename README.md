@@ -8,7 +8,7 @@ make a dynamic view inside a maze, in which you’ll have to find your way."
 
 ## Status
 
-### Retry
+### Waiting for evaluation
 
 ### Updates
 
