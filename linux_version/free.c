@@ -112,5 +112,6 @@ int		freexit(t_index *idx, int err)
 		mlx_destroy_window(idx->ptr, idx->win);
 		exit(0);
 	}
+	free(idx->ptr);
 	return (0);
 }
