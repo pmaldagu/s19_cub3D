@@ -31,7 +31,7 @@ FSAN = -g -fsanitize=address
 all:
 	make -C ./minilibx
 	make -C ./libft
-	gcc -o $(NAME) -I$(HEADER) $(FLGS) $(SRC) $(LIBFT) $(MLX) -lm -lX11 -lXext
+	gcc -g -o $(NAME) -I$(HEADER) $(FLGS) $(SRC) $(LIBFT) $(MLX) -lm -lX11 -lXext
 
 clean: 
 	make -C ./minilibx clean

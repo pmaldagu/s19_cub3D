@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	raycast_loop(&idx, idx.alg, idx.mv);
-	mlx_hook(idx.win, 2, 1L << 1, key_input, idx.mv);
+	mlx_hook(idx.win, 2, 1L << 0, key_input, idx.mv);
 	mlx_hook(idx.win, 17, 0, key_exit, &idx);
 	mlx_loop(idx.ptr);
 	return (0);
