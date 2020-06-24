@@ -14,7 +14,7 @@ make a dynamic view inside a maze, in which you’ll have to find your way."
 
 - [x] correction
 - [x] optimisation
-- [ ] for linux
+- [x] for linux
 
 ## Ressources
 
