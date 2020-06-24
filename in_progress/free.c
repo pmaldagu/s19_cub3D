@@ -56,14 +56,12 @@ void	freemap(t_move *mv, t_text *text)
 		mv->map[i] = NULL;
 		i++;
 	}
+	free(mv->map);
 	mv->map = NULL;
 }
 
 void	freeimg(t_index *idx, t_sprite *sp, t_img *wall)
 {
-	int i;
-
-	i = 0;
 	if (sp->img != NULL)
 		mlx_destroy_image(idx->ptr, sp->img);
 	sp->img = NULL;
@@ -72,7 +70,6 @@ void	freeimg(t_index *idx, t_sprite *sp, t_img *wall)
 	wall->img = NULL;
 	free(sp->path);
 	sp->path = NULL;
-	i = 0;
 	free(sp->zbuffer);
 	sp->zbuffer = NULL;
 	free(sp->smapx);

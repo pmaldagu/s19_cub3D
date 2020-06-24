@@ -56,6 +56,7 @@ void	freemap(t_move *mv, t_text *text)
 		mv->map[i] = NULL;
 		i++;
 	}
+	free(mv->map);
 	mv->map = NULL;
 }
 
