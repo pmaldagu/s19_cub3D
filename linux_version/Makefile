@@ -15,7 +15,7 @@ SRC =	map.c \
 		sprite.c \
 		utils.c \
 		bmp.c \
-		map2merde.c \
+		map_zero.c \
 		free.c \
 		draw.c \
 		main.c
