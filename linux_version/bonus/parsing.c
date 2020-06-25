@@ -6,7 +6,7 @@
 /*   By: pmaldagu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 20:07:17 by pmaldagu          #+#    #+#             */
-/*   Updated: 2020/03/06 19:29:24 by pmaldagu         ###   ########.fr       */
+/*   Updated: 2020/03/10 17:23:15 by pmaldagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ int		pathcheck(char *line, int data, t_text *text, t_sprite *sp)
 		i++;
 	while (line[i] == ' ')
 		i++;
-	if (data == 2)
+	if (data == 2 && !text->path[0])
 		text->path[0] = ft_strdup(&line[i]);
-	else if (data == 3)
+	else if (data == 3 && !text->path[1])
 		text->path[1] = ft_strdup(&line[i]);
-	else if (data == 4)
+	else if (data == 4 && !text->path[2])
 		text->path[2] = ft_strdup(&line[i]);
-	else if (data == 5)
+	else if (data == 5 && !text->path[3])
 		text->path[3] = ft_strdup(&line[i]);
-	else if (data == 6)
+	else if (data == 6 && !sp->path)
 		sp->path = ft_strdup(&line[i]);
 	while (line[i])
 	{
@@ -122,12 +122,21 @@ int		cub(int fd, t_index *idx)
 	char	*mline;
 
 	i = 1;
-	while (get_next_line(fd, &mline) && i < 9)
+	mline = NULL;
+	while (i < 9)
 	{
+		if (!get_next_line(fd, &mline))
+		{
+			free(mline);
+			return (0);
+		}
 		if (mline[0] != '\0')
 		{
 			if (!(cubcheck(mline, idx)))
+			{
+				free(mline);
 				return (0);
+			}
 			else
 				i++;
 		}

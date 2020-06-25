@@ -48,7 +48,7 @@ fclean:
 bonus: fclean
 	make -C ./minilibx
 	make -C ./libft
-	gcc -o $(NAME) -I./bonus/ $(FLGS) $(BONUS) $(LIBFT) $(MLX)
+	gcc -g -o $(NAME) -I./bonus/ $(FLGS) $(BONUS) $(LIBFT) $(MLX) -lm -lX11 -lXext
 
 re: fclean all
 

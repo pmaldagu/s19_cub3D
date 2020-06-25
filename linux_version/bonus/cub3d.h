@@ -239,8 +239,8 @@ void			ft_swap(t_sprite *sp, int i, int j, char coord);
 */
 int				freexit(t_index *idx, int err);
 void			freestruct(t_index *idx);
-void			freeimg(t_index *idx, t_text *text, t_sprite *sp, t_img *wall);
-void			freemap(t_move *mv);
+void			freeimg(t_index *idx, t_sprite *sp, t_img *wall);
+void			freemap(t_move *mv, t_text *text);
 void			initptr(t_index *idx);
 /*
 **bmp

@@ -14,8 +14,8 @@
 
 int	bonusinit(t_index *idx)
 {
-	char *flpath;
-	char *clpath;
+	char	*flpath;
+	char	*clpath;
 
 	flpath = "./bonus/textures/sol.xpm";
 	clpath = "./bonus/textures/sky.xpm";
@@ -25,6 +25,8 @@ int	bonusinit(t_index *idx)
 		return (freexit(idx, 1));
 	else if (!(idx->cl = malloc(sizeof(t_cell))))
 		return (freexit(idx, 1));
+	idx->fl->img = NULL;
+	idx->cl->img = NULL;
 	if (!(idx->fl->img = mlx_xpm_file_to_image(idx->ptr, flpath, \
 					&idx->fl->width, &idx->fl->height)))
 		return (freexit(idx, 1));
@@ -46,8 +48,10 @@ int	key_exit(t_index *idx)
 
 int	main(int argc, char **argv)
 {
-	t_index idx;
+	t_index		idx;
+	t_sprite	sp;
 
+	idx.sp = &sp;
 	if (!(idx.ptr = mlx_init()))
 		return (EXIT_FAILURE);
 	if (!(init(argc, argv, &idx)))
@@ -56,15 +60,15 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (!(bonusinit(&idx)))
 		return (0);
-	if (!(idx.win = mlx_new_window(idx.ptr, idx.w, idx.h, "Cub3d")))
-		return (EXIT_FAILURE);
 	if (argc == 3)
 	{
 		bmp(&idx);
-		return (0);
+		return (freexit(&idx, 1));
 	}
+	if (!(idx.win = mlx_new_window(idx.ptr, idx.w, idx.h, "Cub3D")))
+		return (EXIT_FAILURE);
 	raycast_loop(&idx, idx.alg, idx.mv);
-	mlx_hook(idx.win, 2, 1L << 1, key_input, idx.mv);
+	mlx_hook(idx.win, 2, 1L << 0, key_input, idx.mv);
 	mlx_hook(idx.win, 17, 0, key_exit, &idx);
 	mlx_loop(idx.ptr);
 	return (0);

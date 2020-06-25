@@ -140,5 +140,6 @@ void	raycast_loop(t_index *idx, t_algo *alg, t_move *mv)
 		x++;
 	}
 	sprite(idx, mv, idx->sp);
-	mlx_put_image_to_window(idx->ptr, idx->win, idx->wall->img, 0, 0);
+	if (idx->win)
+		mlx_put_image_to_window(idx->ptr, idx->win, idx->wall->img, 0, 0);
 }

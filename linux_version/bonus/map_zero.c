@@ -6,7 +6,7 @@
 /*   By: pmaldagu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 15:42:25 by pmaldagu          #+#    #+#             */
-/*   Updated: 2020/03/09 14:58:12 by pmaldagu         ###   ########.fr       */
+/*   Updated: 2020/03/10 18:24:07 by pmaldagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 int		poswitch(t_move *mv, int i, int j)
 {
-	if (mv->map[i - 1][j - 1] != ' ' && mv->map[i - 1][j - 1] != '1')
+	if (mv->map[i - 1][j - 1] == ' ')
 		return (0);
-	else if (mv->map[i - 1][j] != ' ' && mv->map[i - 1][j] != '1')
+	else if (mv->map[i - 1][j] == ' ')
 		return (0);
-	else if (mv->map[i - 1][j + 1] != ' ' && mv->map[i - 1][j + 1] != '1')
+	else if (mv->map[i - 1][j + 1] == ' ')
 		return (0);
-	else if (mv->map[i][j - 1] != ' ' && mv->map[i][j - 1] != '1')
+	else if (mv->map[i][j - 1] == ' ')
 		return (0);
-	else if (mv->map[i][j + 1] != ' ' && mv->map[i][j + 1] != '1')
+	else if (mv->map[i][j + 1] == ' ')
 		return (0);
-	else if (mv->map[i + 1][j - 1] != ' ' && mv->map[i + 1][j - 1] != '1')
+	else if (mv->map[i + 1][j - 1] == ' ')
 		return (0);
-	else if (mv->map[i + 1][j] != ' ' && mv->map[i + 1][j] != '1')
+	else if (mv->map[i + 1][j] == ' ')
 		return (0);
-	else if (mv->map[i + 1][j + 1] != ' ' && mv->map[i + 1][j + 1] != '1')
+	else if (mv->map[i + 1][j + 1] == ' ')
 		return (0);
 	else
 		return (1);
@@ -45,7 +45,7 @@ int		checkentour(t_move *mv)
 		j = 1;
 		while (mv->map[i][j + 1])
 		{
-			if (mv->map[i][j] == ' ')
+			if (mv->map[i][j] == '0' || mv->map[i][j] == '2')
 			{
 				if (!(poswitch(mv, i, j)))
 					return (0);

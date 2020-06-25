@@ -6,7 +6,7 @@
 /*   By: pmaldagu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:56:53 by pmaldagu          #+#    #+#             */
-/*   Updated: 2020/03/09 16:33:31 by pmaldagu         ###   ########.fr       */
+/*   Updated: 2020/03/10 18:50:59 by pmaldagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,47 +35,48 @@ void	initptr(t_index *idx)
 	idx->sp->zbuffer = NULL;
 }
 
-void	freemap(t_move *mv)
-{
-	int i;
-
-	i = 0;
-	while (i < mv->maxy)
-	{
-		free(mv->map[i]);
-		mv->map[i] = NULL;
-		i++;
-	}
-	mv->map = NULL;
-}
-
-void	freeimg(t_index *idx, t_text *text, t_sprite *sp, t_img *wall)
+void	freemap(t_move *mv, t_text *text)
 {
 	int i;
 
 	i = 0;
 	while (i < 4)
 	{
-		mlx_destroy_image(idx->ptr, text->img[i]);
+		if (text->img[i] != NULL)
+			mlx_destroy_image(mv->idx->ptr, text->img[i]);
 		free(text->path[i]);
 		text->img[i] = NULL;
 		text->path[i] = NULL;
 		i++;
 	}
-	mlx_destroy_image(idx->ptr, sp->img);
+	i = 0;
+	while (mv->map && mv->map[i])
+	{
+		free(mv->map[i]);
+		mv->map[i] = NULL;
+		i++;
+	}
+	free(mv->map);
+	mv->map = NULL;
+}
+
+void	freeimg(t_index *idx, t_sprite *sp, t_img *wall)
+{
+	if (sp->img != NULL)
+		mlx_destroy_image(idx->ptr, sp->img);
 	sp->img = NULL;
-	mlx_destroy_image(idx->ptr, wall->img);
+	if (wall->img != NULL)
+		mlx_destroy_image(idx->ptr, wall->img);
 	wall->img = NULL;
 	free(sp->path);
 	sp->path = NULL;
-	i = 0;
 	free(sp->zbuffer);
 	sp->zbuffer = NULL;
 	free(sp->smapx);
 	free(sp->smapy);
 	sp->smapx = NULL;
 	sp->smapy = NULL;
-	freemap(idx->mv);
+	freemap(idx->mv, idx->text);
 }
 
 void	freestruct(t_index *idx)
@@ -84,12 +85,19 @@ void	freestruct(t_index *idx)
 	free(idx->mv);
 	free(idx->wall);
 	free(idx->text);
-	free(idx->sp);
+	if (idx->fl->img)
+		mlx_destroy_image(idx->ptr, idx->fl->img);
+	if (idx->cl->img)
+		mlx_destroy_image(idx->ptr, idx->cl->img);
+	free(idx->fl);
+	free(idx->cl);
 	idx->alg = NULL;
 	idx->mv = NULL;
 	idx->wall = NULL;
 	idx->text = NULL;
 	idx->sp = NULL;
+	idx->fl = NULL;
+	idx->cl = NULL;
 }
 
 int		freexit(t_index *idx, int err)
@@ -101,16 +109,17 @@ int		freexit(t_index *idx, int err)
 	}
 	else if (err == 1)
 	{
-		freeimg(idx, idx->text, idx->sp, idx->wall);
+		freeimg(idx, idx->sp, idx->wall);
 		freestruct(idx);
 	}
 	else if (err == 2)
 	{
 		mlx_clear_window(idx->ptr, idx->win);
-		freeimg(idx, idx->text, idx->sp, idx->wall);
+		freeimg(idx, idx->sp, idx->wall);
 		freestruct(idx);
 		mlx_destroy_window(idx->ptr, idx->win);
 		exit(0);
 	}
+	free(idx->ptr);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pmaldagu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:21:29 by pmaldagu          #+#    #+#             */
-/*   Updated: 2020/03/09 15:07:17 by pmaldagu         ###   ########.fr       */
+/*   Updated: 2020/03/10 18:42:44 by pmaldagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ int	s_init(int fd, t_index *idx)
 	idx->alg = NULL;
 	idx->wall = NULL;
 	idx->text = NULL;
-	idx->sp = NULL;
 	if (!(idx->alg = malloc(sizeof(t_algo))))
 		return (freexit(idx, 0));
 	else if (!(idx->wall = malloc(sizeof(t_img))))
@@ -111,8 +110,8 @@ int	s_init(int fd, t_index *idx)
 		return (freexit(idx, 0));
 	else if (!(idx->text = malloc(sizeof(t_text))))
 		return (freexit(idx, 0));
-	else if (!(idx->sp = malloc(sizeof(t_sprite))))
-		return (freexit(idx, 0));
+	idx->mv->maxy = 0;
+	idx->mv->map = NULL;
 	initptr(idx);
 	return (cuberror(fd, idx, idx->wall));
 }
@@ -124,22 +123,22 @@ int	init(int argc, char **argv, t_index *idx)
 	if (argc == 1 || argc > 3)
 	{
 		write(1, "Error\nInvalid arguments\n", 24);
-		return (0);
+		return (freexit(idx, -1));
 	}
 	else if (argc >= 2 && ft_strncmp(ft_strrchr(argv[1], '.'), ".cub", 4))
 	{
 		write(1, "Error\nInvalid file extension\n", 29);
-		return (0);
+		return (freexit(idx, -1));
 	}
 	else if (argc == 3 && ft_strncmp(argv[2], "--save", ft_strlen(argv[2])))
 	{
 		write(1, "Error\nInvalid option\n", 21);
-		return (0);
+		return (freexit(idx, -1));
 	}
 	else if ((fd = open(argv[1], O_RDONLY)) <= 0)
 	{
 		write(1, "Error\nNo such file or directory\n", 32);
-		return (0);
+		return (freexit(idx, -1));
 	}
 	else
 		return (s_init(fd, idx));

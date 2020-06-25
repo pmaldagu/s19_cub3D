@@ -122,8 +122,14 @@ int		cub(int fd, t_index *idx)
 	char	*mline;
 
 	i = 1;
-	while (i < 9 && get_next_line(fd, &mline))
+	mline = NULL;
+	while (i < 9)
 	{
+		if (!get_next_line(fd, &mline))
+		{
+			free(mline);
+			return (0);
+		}
 		if (mline[0] != '\0')
 		{
 			if (!(cubcheck(mline, idx)))

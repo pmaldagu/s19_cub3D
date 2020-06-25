@@ -6,7 +6,7 @@
 /*   By: pmaldagu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:31:18 by pmaldagu          #+#    #+#             */
-/*   Updated: 2020/03/06 17:59:16 by pmaldagu         ###   ########.fr       */
+/*   Updated: 2020/03/10 18:13:46 by pmaldagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	sprite_y(t_index *idx, int spheight, int texx, int stripe)
 	{
 		d = (y) * 256 - idx->h * 128 + spheight * 128;
 		texy = ((d * 64) / spheight) / 256;
-		if ((sprite[texy * 64 + texx] & 0x00FFFFFF) && texy < 64)
+		if (texy < 64 && (sprite[texy * 64 + texx] & 0x00FFFFFF))
 			dst[y * idx->w + stripe] = sprite[texy * 64 + texx];
 		y++;
 	}

@@ -49,7 +49,7 @@ int		bmp(t_index *idx)
 	if (fd < 0)
 	{
 		write(1, "Error\nBMP failed\n", 17);
-		return (freexit(idx, 2));
+		return (0);
 	}
 	raycast_loop(idx, idx->alg, idx->mv);
 	bmp_header(idx, idx->wall, fd);

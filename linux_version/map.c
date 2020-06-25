@@ -93,7 +93,9 @@ int		mapcheck(t_index *idx)
 			return (0);
 		y++;
 	}
-	if (!idx->mv->map || !firstline(idx->mv->map[y - 1]))
+	if (!idx->dir)
+		return (0);
+	if (!idx->mv->map || !*idx->mv->map || !firstline(idx->mv->map[y - 1]))
 		return (0);
 	return (1);
 }
