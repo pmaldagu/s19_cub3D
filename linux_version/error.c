@@ -110,6 +110,8 @@ int	s_init(int fd, t_index *idx)
 		return (freexit(idx, 0));
 	else if (!(idx->text = malloc(sizeof(t_text))))
 		return (freexit(idx, 0));
+	idx->mv->maxy = 0;
+	idx->mv->map = NULL;
 	initptr(idx);
 	return (cuberror(fd, idx, idx->wall));
 }

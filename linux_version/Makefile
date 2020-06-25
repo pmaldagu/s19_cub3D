@@ -42,6 +42,7 @@ fclean:
 	make -C ./minilibx clean
 	make -C ./libft fclean
 	rm -rf *.o
+	rm -rf *.bmp
 	rm -rf ${NAME}
 
 bonus: fclean
