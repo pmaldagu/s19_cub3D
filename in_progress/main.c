@@ -30,15 +30,15 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (!(parstostruct(&idx, idx.mv)))
 		return (EXIT_FAILURE);
-	if (!(idx.win = mlx_new_window(idx.ptr, idx.w, idx.h, "Cub3D")))
-		return (EXIT_FAILURE);
 	if (argc == 3)
 	{
 		bmp(&idx);
-		return (0);
+		return (freexit(&idx, 1));
 	}
+	if (!(idx.win = mlx_new_window(idx.ptr, idx.w, idx.h, "Cub3D")))
+		return (EXIT_FAILURE);
 	raycast_loop(&idx, idx.alg, idx.mv);
-	mlx_hook(idx.win, 2, 1L << 1, key_input, idx.mv);
+	mlx_hook(idx.win, 2, 1L << 0, key_input, idx.mv);
 	mlx_hook(idx.win, 17, 0, key_exit, &idx);
 	mlx_loop(idx.ptr);
 	return (0);

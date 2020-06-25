@@ -85,7 +85,7 @@ int		mapcheck(t_index *idx)
 	int		y;
 
 	y = 0;
-	while (idx->mv->map[y])
+	while (idx->mv->map && idx->mv->map[y])
 	{
 		if (y == 0 && !firstline(idx->mv->map[y]))
 			return (0);
@@ -93,7 +93,7 @@ int		mapcheck(t_index *idx)
 			return (0);
 		y++;
 	}
-	if (!firstline(idx->mv->map[y - 1]))
+	if (!idx->mv->map || !firstline(idx->mv->map[y - 1]))
 		return (0);
 	return (1);
 }
@@ -109,7 +109,6 @@ int		storemap(int fd, t_index *idx)
 		ft_free(line);
 	map = ft_strjoin(line, "\n");
 	ft_free(line);
-	line = "";
 	while (get_next_line(fd, &line))
 	{
 		tmp = line;
@@ -121,8 +120,7 @@ int		storemap(int fd, t_index *idx)
 		ft_free(line);
 	}
 	ft_free(line);
-	if (!(idx->mv->map = ft_split(map, '\n')))
-		return (0);
+	idx->mv->map = ft_split(map, '\n');
 	ft_free(map);
 	return (mapcheck(idx));
 }

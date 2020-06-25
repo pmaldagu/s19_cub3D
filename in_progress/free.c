@@ -50,7 +50,7 @@ void	freemap(t_move *mv, t_text *text)
 		i++;
 	}
 	i = 0;
-	while (i < mv->maxy)
+	while (mv->map && mv->map[i])
 	{
 		free(mv->map[i]);
 		mv->map[i] = NULL;
@@ -112,5 +112,6 @@ int		freexit(t_index *idx, int err)
 		mlx_destroy_window(idx->ptr, idx->win);
 		exit(0);
 	}
+	free(idx->ptr);
 	return (0);
 }
