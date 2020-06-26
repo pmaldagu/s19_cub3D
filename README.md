@@ -20,3 +20,4 @@ make a dynamic view inside a maze, in which you’ll have to find your way."
 
 - [Lode's Computer Graphics Tutorial](https://lodev.org/cgtutor/raycasting.html)
 - [MiniLibX](https://harm-smits.github.io/42docs/libs/minilibx)
+- [Event Types](https://tronche.com/gui/x/xlib/events/types.html)
