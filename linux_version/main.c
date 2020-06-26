@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+static int visible(t_index *idx)
+{
+	raycast_loop(idx, idx->alg, idx->mv);
+	return (0);
+}
+
 int	key_exit(t_index *idx)
 {
 	freexit(idx, 2);
@@ -38,8 +44,9 @@ int	main(int argc, char **argv)
 	if (!(idx.win = mlx_new_window(idx.ptr, idx.w, idx.h, "Cub3D")))
 		return (EXIT_FAILURE);
 	raycast_loop(&idx, idx.alg, idx.mv);
-	mlx_hook(idx.win, 2, 1L << 0, key_input, idx.mv);
-	mlx_hook(idx.win, 17, 0, key_exit, &idx);
+	mlx_hook(idx.win, 2, 1L<<0, key_input, idx.mv);
+	mlx_hook(idx.win, 17, 1L<<17, key_exit, &idx);
+	mlx_hook(idx.win, 15, 1L<<16, visible, &idx);
 	mlx_loop(idx.ptr);
 	return (0);
 }
