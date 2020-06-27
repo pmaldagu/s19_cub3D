@@ -30,8 +30,8 @@ int		dirtostruct(t_index *idx, t_move *mv)
 		mv->planey = 0;
 		if (idx->dir == 'N')
 		{
-			mv->diry *= -1.0;
-			mv->planex *= -1.0;
+			mv->diry = -1.0;
+			mv->planex = 0.66;
 		}
 	}
 	else if (idx->dir == 'W' || idx->dir == 'E')
@@ -42,8 +42,8 @@ int		dirtostruct(t_index *idx, t_move *mv)
 		mv->planey = -0.66;
 		if (idx->dir == 'E')
 		{
-			mv->diry *= -1.0;
-			mv->planex *= -1.0;
+			mv->dirx = 1.0;
+			mv->planey = 0.66;
 		}
 	}
 	return (1);
