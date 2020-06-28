@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	s_free(t_index *idx)
+int		s_free(t_index *idx)
 {
 	free(idx->alg);
 	free(idx->wall);
@@ -21,10 +21,10 @@ int	s_free(t_index *idx)
 	return (0);
 }
 
-int	colorpars(char *line)
+int		colorpars(char *line)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 1;
 	j = 0;
@@ -83,9 +83,9 @@ size_t	ft_ostrlen(const char *str, char o)
 
 char	*ft_ostrjoin(const char *s1, const char *s2, char o)
 {
-	int	i;
-	int	j;
-	int	k;
+	int		i;
+	int		j;
+	int		k;
 	char	*join;
 
 	i = 0;
