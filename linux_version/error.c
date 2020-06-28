@@ -125,17 +125,18 @@ int	init(int argc, char **argv, t_index *idx)
 		write(1, "Error\nInvalid arguments\n", 24);
 		return (freexit(idx, -1));
 	}
-	else if (argc >= 2 && ft_strncmp(ft_strrchr(argv[1], '.'), ".cub", 4))
+	if (argc >= 2 && (!ft_strrchr(argv[1], '.') ||
+		ft_strncmp(ft_strrchr(argv[1], '.'), ".cub", 4)))
 	{
 		write(1, "Error\nInvalid file extension\n", 29);
 		return (freexit(idx, -1));
 	}
-	else if (argc == 3 && ft_strncmp(argv[2], "--save", ft_strlen(argv[2])))
+	if (argc == 3 && ft_strncmp(argv[2], "--save", ft_strlen(argv[2])))
 	{
 		write(1, "Error\nInvalid option\n", 21);
 		return (freexit(idx, -1));
 	}
-	else if ((fd = open(argv[1], O_RDONLY)) <= 0)
+	if ((fd = open(argv[1], O_RDONLY)) <= 0)
 	{
 		write(1, "Error\nNo such file or directory\n", 32);
 		return (freexit(idx, -1));
