@@ -35,7 +35,7 @@ int		colorcheck(char *l, int data, t_index *idx)
 		idx->f = result;
 	else
 		idx->c = result;
-	if (l[i] != '\0')
+	if (l[i] != '\0' || !colorpars(l))
 		return (0);
 	return (1);
 }
@@ -88,7 +88,7 @@ int		rescheck(char *line, t_index *idx)
 	maxres(idx);
 	while (ft_isdigit(line[i]))
 		i++;
-	if (line[i] != '\0')
+	if (line[i] != '\0' || idx->h == 0 || idx->w == 0)
 		return (0);
 	else
 		return (1);

@@ -12,13 +12,39 @@
 
 #include "cub3d.h"
 
-int		s_free(t_index *idx)
+int	s_free(t_index *idx)
 {
 	free(idx->alg);
 	free(idx->wall);
 	free(idx->text);
 	free(idx->sp);
 	return (0);
+}
+
+int	colorpars(char *line)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	j = 0;
+	while (j < 3 && line[i + 1])
+	{
+		while (line[i] == ' ')
+			i++;
+		if (line[i] == '0' && ft_isdigit(line[i + 1]))
+			return (0);
+		while (ft_isdigit(line[i]))
+			i++;
+		while (j < 2 && line[i] == ' ')
+			i++;
+		if (j < 2 && line[i++] != ',')
+			return (0);
+		j++;
+	}
+	if (line[i] != '\0')
+		return (0);
+	return (1);
 }
 
 void	ft_swap(t_sprite *sp, int i, int j, char coord)
@@ -57,9 +83,9 @@ size_t	ft_ostrlen(const char *str, char o)
 
 char	*ft_ostrjoin(const char *s1, const char *s2, char o)
 {
-	int		i;
-	int		j;
-	int		k;
+	int	i;
+	int	j;
+	int	k;
 	char	*join;
 
 	i = 0;
