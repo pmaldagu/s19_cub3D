@@ -217,6 +217,7 @@ void			strife(int key, t_move *mv);
 /*
 **draw
 */
+int			shade_color(int color, float distance);
 void			draw_column(t_index *idx, t_algo *alg, int x);
 void			background(t_index *idx, t_img *back);
 /*
@@ -230,6 +231,7 @@ void			sprite_y(t_index *idx, int spheight, int texx, int stripe);
 /*
 **utils
 */
+int			colorpars(char *line);
 size_t			ft_ostrlen(const char *str, char c);
 char			*ft_ostrjoin(const char *s1, const char *s2, char o);
 int				s_free(t_index *idx);
@@ -251,6 +253,7 @@ void			bitshift(char *header, unsigned int value);
 /*
 **main
 */
+int			visible(t_index *idx);
 int				key_exit(t_index *idx);
 int				bonusinit(t_index *idx);
 /*
