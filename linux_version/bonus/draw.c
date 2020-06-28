@@ -14,14 +14,14 @@
 
 int	shade_color(int color, float distance) //divide = distance / 1.5
 {
-	int divide;
+	float divide;
 
 	divide = distance / 1.5;
 	if (divide <= 1.0)
 		return (color);
-	color = (int)(((0xFF0000 & color) >> 16) / divide) << 16;
-	color = (int)(((0xFF0000 & color) >> 8) / divide) << 8;
-	color = (int)((0xFF0000 & color) / divide);
+	color = ((int)(((0xFF0000 & color) >> 16) / divide) << 16) +
+	((int)(((0x00FF00 & color) >> 8) / divide) << 8) + 
+	((int)((0x0000FF & color) / divide));
 	return color;
 }
 

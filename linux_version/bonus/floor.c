@@ -32,9 +32,10 @@ void	draw_cell(t_index *idx, t_floor *fl, t_cell *cl, int y)
 					cl->celly)) & (cl->height - 1);
 		fl->floorx += fl->fstepx;
 		fl->floory += fl->fstepy;
-		dst[y * idx->w + x] = floor[fl->width * cl->ty + cl->tx];
+		dst[y * idx->w + x] = 
+			shade_color(floor[fl->width * cl->ty + cl->tx], fl->rowdist);
 		dst[(idx->h * idx->w) - (idx->w * y) - idx->w + x] =
-			ceil[fl->width * cl->ty + cl->tx];
+			shade_color(ceil[fl->width * cl->ty + cl->tx], fl->rowdist);
 		x++;
 	}
 }
