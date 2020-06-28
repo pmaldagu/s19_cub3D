@@ -52,7 +52,7 @@ int		checkline(char *line, t_index *idx, int l)
 			if (!dircheck(line[i], idx, l, i))
 				return (0);
 		}
-		else if (line[i] < '0' && line[i] > '2' && line[i] != ' ')
+		else if ((line[i] < '0' || line[i] > '2') && line[i] != ' ')
 			return (0);
 		i++;
 	}
