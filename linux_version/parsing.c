@@ -75,14 +75,14 @@ int		rescheck(char *line, t_index *idx)
 	i = 1;
 	while (line[i] == ' ')
 		i++;
-	if (!ft_isdigit(line[i]))
+	if (!ft_isdigit(line[i]) || line[i] == '0')
 		return (0);
 	idx->w = ft_atoi(&line[i]);
 	while (ft_isdigit(line[i]))
 		i++;
 	while (line[i] == ' ')
 		i++;
-	if (!ft_isdigit(line[i]))
+	if (!ft_isdigit(line[i]) || line[i] == '0')
 		return (0);
 	idx->h = ft_atoi(&line[i]);
 	maxres(idx);
