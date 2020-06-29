@@ -107,6 +107,8 @@ struct			s_index
 {
 	void		*ptr;
 	void		*win;
+	int			scw;
+	int			sch;
 	int			h;
 	int			w;
 	char		dir;

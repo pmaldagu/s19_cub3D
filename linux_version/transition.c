@@ -14,10 +14,13 @@
 
 void	maxres(t_index *idx)
 {
-	if (idx->w > 2560)
-		idx->w = 2560;
-	if (idx->h > 1440)
-		idx->h = 1440;
+	idx->scw = 1;
+	idx->sch = 1;
+	mlx_get_screen_size(idx->ptr, &idx->scw, &idx->sch);
+	if (idx->w > idx->scw)
+		idx->w = idx->scw;
+	if (idx->h > idx->sch)
+		idx->h = idx->sch;
 }
 
 int		dirtostruct(t_index *idx, t_move *mv)
