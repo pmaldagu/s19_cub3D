@@ -29,7 +29,7 @@ void	sprite_y(t_index *idx, int spheight, int texx, int stripe)
 		d = (y) * 256 - idx->h * 128 + spheight * 128;
 		texy = ((d * 64) / spheight) / 256;
 		if (texy < 64 && (sprite[texy * 64 + texx] & 0x00FFFFFF))
-			dst[y * idx->w + stripe] = 
+			dst[y * idx->w + stripe] =
 			shade_color(sprite[texy * 64 + texx], idx->sp->zbuffer[stripe]);
 		y++;
 	}

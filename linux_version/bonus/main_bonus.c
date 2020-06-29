@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	bonusinit(t_index *idx)
 {
@@ -38,6 +38,12 @@ int	bonusinit(t_index *idx)
 	idx->cl->addr = mlx_get_data_addr(idx->cl->img, &idx->cl->bits_per_pixel, \
 			&idx->cl->line_length, &idx->cl->endian);
 	return (1);
+}
+
+int	visible(t_index *idx)
+{
+	raycast_loop(idx, idx->alg, idx->mv);
+	return (0);
 }
 
 int	key_exit(t_index *idx)
@@ -69,7 +75,8 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	raycast_loop(&idx, idx.alg, idx.mv);
 	mlx_hook(idx.win, 2, 1L << 0, key_input, idx.mv);
-	mlx_hook(idx.win, 17, 0, key_exit, &idx);
+	mlx_hook(idx.win, 17, 1L << 17, key_exit, &idx);
+	mlx_hook(idx.win, 15, 1L << 16, visible, &idx);
 	mlx_loop(idx.ptr);
 	return (0);
 }

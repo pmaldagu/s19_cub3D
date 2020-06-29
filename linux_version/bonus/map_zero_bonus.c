@@ -40,6 +40,8 @@ int		checkentour(t_move *mv)
 	int		j;
 
 	i = 1;
+	if (!poswitch(mv, (int)mv->posy, (int)mv->posx))
+		return (0);
 	while (mv->map[i + 1])
 	{
 		j = 1;

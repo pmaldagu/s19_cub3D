@@ -12,25 +12,25 @@
 
 #include "cub3d.h"
 
-int	shade_color(int color, float distance) //divide = distance / 1.5
+int		shade_color(int color, float distance)
 {
-	float divide;
+	float	divide;
 
 	divide = distance / 1.5;
 	if (divide <= 1.0)
 		return (color);
 	color = ((int)(((0xFF0000 & color) >> 16) / divide) << 16) +
-	((int)(((0x00FF00 & color) >> 8) / divide) << 8) + 
+	((int)(((0x00FF00 & color) >> 8) / divide) << 8) +
 	((int)((0x0000FF & color) / divide));
-	return color;
+	return (color);
 }
 
 void	draw_column(t_index *idx, t_algo *alg, int x)
 {
-	int y;
-	int *dst;
-	int *text;
-	int texy;
+	int		y;
+	int		*dst;
+	int		*text;
+	int		texy;
 
 	y = 0;
 	dst = (int *)idx->wall->addr;
@@ -40,9 +40,9 @@ void	draw_column(t_index *idx, t_algo *alg, int x)
 	{
 		texy = (int)idx->text->textpos & (TXT_HW - 1);
 		idx->text->textpos += idx->text->step;
-		dst[y * idx->w + x] = 
+		dst[y * idx->w + x] =
 			shade_color(text[texy * TXT_HW + idx->text->texx],
-			 alg->perpwdist);
+			alg->perpwdist);
 		y++;
 	}
 }

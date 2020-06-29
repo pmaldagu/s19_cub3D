@@ -191,7 +191,7 @@ void			sprite_y(t_index *idx, int spheight, int texx, int stripe);
 /*
 **utils
 */
-int			colorpars(char *line);
+int				colorpars(char *line);
 size_t			ft_ostrlen(const char *str, char c);
 char			*ft_ostrjoin(const char *s1, const char *s2, char o);
 int				s_free(t_index *idx);
@@ -213,6 +213,7 @@ void			bitshift(char *header, unsigned int value);
 /*
 **main
 */
+int				visible(t_index *idx);
 int				key_exit(t_index *idx);
 
 #endif

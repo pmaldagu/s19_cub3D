@@ -35,7 +35,7 @@ int		colorcheck(char *l, int data, t_index *idx)
 		idx->f = result;
 	else
 		idx->c = result;
-	if (l[i] != '\0')
+	if (l[i] != '\0' || !colorpars(l))
 		return (0);
 	return (1);
 }
@@ -75,20 +75,20 @@ int		rescheck(char *line, t_index *idx)
 	i = 1;
 	while (line[i] == ' ')
 		i++;
-	if (!ft_isdigit(line[i]))
+	if (!ft_isdigit(line[i]) || line[i] == '0')
 		return (0);
 	idx->w = ft_atoi(&line[i]);
 	while (ft_isdigit(line[i]))
 		i++;
 	while (line[i] == ' ')
 		i++;
-	if (!ft_isdigit(line[i]))
+	if (!ft_isdigit(line[i]) || line[i] == '0')
 		return (0);
 	idx->h = ft_atoi(&line[i]);
 	maxres(idx);
 	while (ft_isdigit(line[i]))
 		i++;
-	if (line[i] != '\0')
+	if (line[i] != '\0' || idx->h == 0 || idx->w == 0)
 		return (0);
 	else
 		return (1);
@@ -96,21 +96,21 @@ int		rescheck(char *line, t_index *idx)
 
 int		cubcheck(char *line, t_index *idx)
 {
-	if (!ft_strncmp(line, "R", 1))
+	if (!ft_strncmp(line, "R ", 2))
 		return (rescheck(line, idx));
-	else if (!ft_strncmp(line, "NO", 2))
+	else if (!ft_strncmp(line, "NO ", 3))
 		return (pathcheck(line, 2, idx->text, idx->sp));
-	else if (!ft_strncmp(line, "SO", 2))
+	else if (!ft_strncmp(line, "SO ", 3))
 		return (pathcheck(line, 3, idx->text, idx->sp));
-	else if (!ft_strncmp(line, "WE", 2))
+	else if (!ft_strncmp(line, "WE ", 3))
 		return (pathcheck(line, 4, idx->text, idx->sp));
-	else if (!ft_strncmp(line, "EA", 2))
+	else if (!ft_strncmp(line, "EA ", 3))
 		return (pathcheck(line, 5, idx->text, idx->sp));
-	else if (!ft_strncmp(line, "S", 1))
+	else if (!ft_strncmp(line, "S ", 2))
 		return (pathcheck(line, 6, idx->text, idx->sp));
-	else if (!ft_strncmp(line, "F", 1))
+	else if (!ft_strncmp(line, "F ", 2))
 		return (colorcheck(line, 7, idx));
-	else if (!ft_strncmp(line, "C", 1))
+	else if (!ft_strncmp(line, "C ", 2))
 		return (colorcheck(line, 8, idx));
 	else
 		return (0);
