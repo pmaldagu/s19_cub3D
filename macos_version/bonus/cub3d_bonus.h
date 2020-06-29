@@ -6,12 +6,12 @@
 /*   By: pmaldagu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 20:16:53 by pmaldagu          #+#    #+#             */
-/*   Updated: 2020/03/10 18:49:37 by pmaldagu         ###   ########.fr       */
+/*   Updated: 2020/03/09 20:58:33 by pmaldagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
@@ -19,11 +19,48 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <math.h>
-# include "./minilibx/mlx.h"
-# include "./libft/libft.h"
+# include "../minilibx/mlx.h"
+# include "../libft/libft.h"
 # define TXT_HW 64
 
 typedef struct s_index	t_index;
+
+typedef struct	s_cell
+{
+	void		*img;
+	char		*addr;
+	int			width;
+	int			height;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			cellx;
+	int			celly;
+	int			tx;
+	int			ty;
+}				t_cell;
+
+typedef	struct	s_floor
+{
+	void		*img;
+	char		*addr;
+	int			width;
+	int			height;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	float		raydirfx;
+	float		raydirfy;
+	float		raydircx;
+	float		raydircy;
+	int			p;
+	float		posz;
+	float		rowdist;
+	float		fstepx;
+	float		fstepy;
+	float		floorx;
+	float		floory;
+}				t_floor;
 
 typedef struct	s_move
 {
@@ -117,6 +154,8 @@ struct			s_index
 	t_img		*wall;
 	t_text		*text;
 	t_sprite	*sp;
+	t_floor		*fl;
+	t_cell		*cl;
 };
 
 /*
@@ -178,6 +217,7 @@ void			strife(int key, t_move *mv);
 /*
 **draw
 */
+int				shade_color(int color, float distance);
 void			draw_column(t_index *idx, t_algo *alg, int x);
 void			background(t_index *idx, t_img *back);
 /*
@@ -191,6 +231,7 @@ void			sprite_y(t_index *idx, int spheight, int texx, int stripe);
 /*
 **utils
 */
+int				colorpars(char *line);
 size_t			ft_ostrlen(const char *str, char c);
 char			*ft_ostrjoin(const char *s1, const char *s2, char o);
 int				s_free(t_index *idx);
@@ -212,6 +253,13 @@ void			bitshift(char *header, unsigned int value);
 /*
 **main
 */
+int				visible(t_index *idx);
 int				key_exit(t_index *idx);
+int				bonusinit(t_index *idx);
+/*
+**floor
+*/
+void			draw_cell(t_index *idx, t_floor *fl, t_cell *cl, int y);
+void			draw_floor(t_index *idx, t_move *mv, t_floor *fl, t_cell *cl);
 
 #endif

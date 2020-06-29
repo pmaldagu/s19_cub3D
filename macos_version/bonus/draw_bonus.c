@@ -6,40 +6,43 @@
 /*   By: pmaldagu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 15:20:43 by pmaldagu          #+#    #+#             */
-/*   Updated: 2020/03/10 18:40:59 by pmaldagu         ###   ########.fr       */
+/*   Updated: 2020/03/10 14:41:28 by pmaldagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
-int	key_exit(t_index *idx)
+int		shade_color(int color, float distance)
 {
-	freexit(idx, 2);
-	return (0);
+	float	divide;
+
+	divide = distance / 1.5;
+	if (divide <= 1.0)
+		return (color);
+	color = ((int)(((0xFF0000 & color) >> 16) / divide) << 16) +
+	((int)(((0x00FF00 & color) >> 8) / divide) << 8) +
+	((int)((0x0000FF & color) / divide));
+	return (color);
 }
 
-int	main(int argc, char **argv)
+void	draw_column(t_index *idx, t_algo *alg, int x)
 {
-	t_index		idx;
-	t_sprite	sp;
+	int		y;
+	int		*dst;
+	int		*text;
+	int		texy;
 
-	idx.sp = &sp;
-	if (!(idx.ptr = mlx_init()))
-		return (EXIT_FAILURE);
-	if (!(init(argc, argv, &idx)))
-		return (EXIT_FAILURE);
-	if (!(parstostruct(&idx, idx.mv)))
-		return (EXIT_FAILURE);
-	if (argc == 3)
+	y = 0;
+	dst = (int *)idx->wall->addr;
+	text = (int *)idx->text->addr[idx->text->wall];
+	y = alg->drstart;
+	while (y <= alg->drend)
 	{
-		bmp(&idx);
-		return (freexit(&idx, 1));
+		texy = (int)idx->text->textpos & (TXT_HW - 1);
+		idx->text->textpos += idx->text->step;
+		dst[y * idx->w + x] =
+			shade_color(text[texy * TXT_HW + idx->text->texx],
+			alg->perpwdist);
+		y++;
 	}
-	if (!(idx.win = mlx_new_window(idx.ptr, idx.w, idx.h, "Cub3D")))
-		return (EXIT_FAILURE);
-	raycast_loop(&idx, idx.alg, idx.mv);
-	mlx_hook(idx.win, 2, 1L << 0, key_input, idx.mv);
-	mlx_hook(idx.win, 17, 0, key_exit, &idx);
-	mlx_loop(idx.ptr);
-	return (0);
 }

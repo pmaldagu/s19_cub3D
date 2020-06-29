@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int		poswitch(t_move *mv, int i, int j)
 {
@@ -40,6 +40,8 @@ int		checkentour(t_move *mv)
 	int		j;
 
 	i = 1;
+	if (!poswitch(mv, (int)mv->posy, (int)mv->posx))
+		return (0);
 	while (mv->map[i + 1])
 	{
 		j = 1;
