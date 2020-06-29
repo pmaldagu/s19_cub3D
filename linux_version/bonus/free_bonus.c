@@ -85,19 +85,11 @@ void	freestruct(t_index *idx)
 	free(idx->mv);
 	free(idx->wall);
 	free(idx->text);
-	if (idx->fl->img)
-		mlx_destroy_image(idx->ptr, idx->fl->img);
-	if (idx->cl->img)
-		mlx_destroy_image(idx->ptr, idx->cl->img);
-	free(idx->fl);
-	free(idx->cl);
 	idx->alg = NULL;
 	idx->mv = NULL;
 	idx->wall = NULL;
 	idx->text = NULL;
 	idx->sp = NULL;
-	idx->fl = NULL;
-	idx->cl = NULL;
 }
 
 int		freexit(t_index *idx, int err)
