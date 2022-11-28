@@ -21,7 +21,7 @@ Compile the project:
 ```
 make
 ```
-Compile with bonus
+Compile with bonus:
 ```
 make bonus
 ```
